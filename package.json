@@ -1,6 +1,6 @@
 {
   "name": "node-country-list",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "country names by Alpha-2 country code in multiple languages",
   "keywords": [
     "i18n",
@@ -156,9 +156,7 @@
       }
     }
   },
-  "dependencies": {
-    "test": "^0.6.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^10.7.1",
     "jest": "^23.5.0"
