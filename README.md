@@ -18,7 +18,7 @@ Countries.get('something', 'unknown'); // undefined
 
 # please note
 * library is using lazy loading for language data to safe on startup and overall memory footprint
-* it is nodejs library - `fs` and `path` is required
+* it is nodejs library - `fs` and `path` are required
 
 # supported language codes
 * af
