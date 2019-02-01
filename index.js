@@ -1,6 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
+// cache all available translations at startup
+const availableTranslations = fs
+  .readdirSync(path.resolve(__dirname, 'countries/'))
+  .map((file) => path.basename(file, '.json'));
 const countries = {};
 
 /**
@@ -20,32 +24,40 @@ class Countries {
     return result;
   }
   /**
+   * test if str is language that is available for translation
+   * @param {string} str
+   * @return {boolean}
+   */
+  static _isLangTranslated(str) {
+    return availableTranslations.indexOf(str) !== -1;
+  }
+  /**
    * validate lang code
    * @param {string} str
    * @return {string}
    */
   static _toValidLang(str) {
     const result = (str || '').toLowerCase();
-    if (!/^[a-z]{2}$/.test(result)) {
+    if (!this._isLangTranslated(result)) {
       return undefined;
     }
     return result;
   }
   /**
    * construct path to language file
-   * @param {string} lang Alpha-2 language
+   * @param {string} lang starting with Alpha-2 language with optional script like zh-hans
    * @return {string}
    */
   static _pathToLanguageFile(lang) {
     return path.resolve(__dirname, `countries/${lang}.json`);
   }
   /**
-   * read translation file for langauge
-   * @param {string} lang Alpha-2 language
+   * read translation file for language
+   * @param {string} lang starting with Alpha-2 language with optional script like zh-hans
    * @return {object}
    */
   static _readFile(lang) {
-    if (!/^[a-z]{2}$/.test(lang)) {
+    if (!this._isLangTranslated(lang)) {
       return undefined;
     }
     try {
@@ -58,7 +70,7 @@ class Countries {
   /**
    * get country code in given language
    * @param {string} code Alpha-2 country code
-   * @param {string} lang Alpha-2 language
+   * @param {string} lang starting with Alpha-2 language with optional script like zh-hans
    * @return {string|undefined}
    */
   static get(code, lang) {
@@ -67,18 +79,18 @@ class Countries {
     if (!countryCode || !langCode) {
       return undefined;
     }
-    let translation = countries[langCode];
+    let translation = countries[`${langCode}`];
     if (translation === null) {
       return undefined;
     }
     if (translation === undefined) {
       translation = this._readFile(langCode);
-      countries[langCode] = translation || null;
+      countries[`${langCode}`] = translation || null;
       if (translation === undefined) {
         return undefined;
       }
     }
-    return translation[countryCode];
+    return translation[`${countryCode}`];
   }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "node-country-list",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "country names by Alpha-2 country code in multiple languages",
   "keywords": [
     "i18n",
@@ -129,6 +129,8 @@
     "yi",
     "yo",
     "zh",
+    "zh-hant",
+    "zh-hans",
     "zu"
   ],
   "engines": {

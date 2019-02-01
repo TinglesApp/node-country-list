@@ -13,6 +13,8 @@ const Countries = require('node-country-list');
 // Countries.get(alpha2Code: string, langCode: string): string
 Countries.get('us', 'de'); // Vereinigte Staaten
 Countries.get('FR', 'ZH'); // 法国
+Countries.get('us', 'zh-hans'); // 美国
+Countries.get('us', 'zh-hant'); // 美國
 Countries.get('something', 'unknown'); // undefined
 ```
 
@@ -142,6 +144,8 @@ Countries.get('something', 'unknown'); // undefined
 * yi
 * yo
 * zh
+* zh-hans
+* zh-hant
 * zu
 
 # sources
