@@ -22,6 +22,16 @@ const Country = require('./../index');
     expected: undefined,
   },
   {
+    country: 'US',
+    language: 'zh-hans',
+    expected: '美国',
+  },
+  {
+    country: 'US',
+    language: 'zh-hant',
+    expected: '美國',
+  },
+  {
     country: 'non existing',
     language: 'en',
     expected: undefined,
